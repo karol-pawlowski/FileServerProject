@@ -145,8 +145,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\File.cs" />
+    <Compile Include="Contracts\IUserController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
-    <Compile Include="Controllers\TokensController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
