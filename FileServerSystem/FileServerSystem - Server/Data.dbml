@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FileServerDB" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\FileServerDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FileServerDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[FILE]" Member="FILEs">
+    <Type Name="FILE">
+      <Column Name="Login" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="File_Length" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="File_Data" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="File_Name" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="File_Extension" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="USER_FILE" Member="USER" ThisKey="Login" OtherKey="Login" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[USER]" Member="USERs">
+    <Type Name="USER">
+      <Column Name="Login" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="USER_FILE" Member="FILEs" ThisKey="Login" OtherKey="Login" Type="FILE" />
+      <Association Name="USER_TOKEN" Member="TOKENs" ThisKey="Login" OtherKey="Login" Type="TOKEN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TOKEN" Member="TOKENs">
+    <Type Name="TOKEN">
+      <Column Name="Token" Member="Token1" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Login" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Is_Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="USER_TOKEN" Member="USER" ThisKey="Login" OtherKey="Login" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
