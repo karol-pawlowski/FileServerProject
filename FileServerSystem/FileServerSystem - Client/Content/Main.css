@@ -1,0 +1,15 @@
+﻿body {
+}
+content{
+}
+
+#header{
+    text-align:center;
+}
+
+.center{
+    width:980px;
+    min-height:200px;
+    margin-left: auto;
+    margin-right: auto;
+}
