@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace FileServerSystem___Client
+namespace FileServerSystemClient
 {
     public static class WebApiConfig
     {

@@ -1,0 +1,27 @@
+﻿@model FileServerSystemClient.Models.Login
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h2>@ViewBag.Message</h2>
+
+        @using (@Html.BeginForm("Validate", "Login"))
+        {
+            
+            @Html.TextBoxFor(username => Model.Username)
+            @Html.TextBoxFor(password => Model.Password)      
+            <input type="submit" name="btn1" value="Save" />
+        }
+    </div>
+</body>
+</html>
