@@ -148,6 +148,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CodeContracts\FileRepositoryProxyContract.cs" />
     <Compile Include="Common\BootStrapper.cs" />
     <Compile Include="Common\FileRepositoryProxy.cs" />
     <Compile Include="Contracts\IBootStrapper.cs" />
@@ -195,9 +196,7 @@
       <DependentUpon>FileRepository.dbml</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CodeContracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

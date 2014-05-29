@@ -13,8 +13,6 @@ namespace FileServerSystemServer.Controllers
     public class FilesController : ApiController
     {
         // http://localhost:8015/Files
-        
-        private IList<string> _files;    
 
         private IBootStrapper _bootstrapper;
         private IFileRepositoryProxy _proxy;
@@ -44,7 +42,8 @@ namespace FileServerSystemServer.Controllers
         // GET values/5
         public HttpResponseMessage Get(string token, int id)
         {
-            var file = _proxy.GetSpecificFileForTokenAndId(token, id);
+            FileStream file = _proxy.GetSpecificFileForTokenAndId(token, id);
+                       
             return null;
         }
 
@@ -58,7 +57,7 @@ namespace FileServerSystemServer.Controllers
         // PUT values/5
         public void Put(string token, int id, [FromBody]string value)
         {
-            _files[id] = value;
+            //_files[id] = value;
         }
 
         // DELETE values/5
