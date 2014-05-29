@@ -1,11 +1,10 @@
-﻿using System;
+﻿using FileServerSystemServer.CodeContracts;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 namespace FileServerSystemServer.Contracts
 {
+    [ContractClass(typeof(FileRepositoryProxyContract))]
     public interface IFileRepositoryProxy
     {
         IList<string> GetFilesForToken(string token);
