@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace FileServerSystem___Server
+namespace FileServerSystemServer
 {
     public class FilterConfig
     {

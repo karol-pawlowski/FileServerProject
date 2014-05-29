@@ -1,6 +1,8 @@
 ﻿
-namespace FileServerSystem___Server.Contracts
-{
+using System.ServiceModel;
+namespace UserManagementService.Contracts
+{    
+    [ServiceContract]
     public interface IUserController
     {
         /// <summary>
@@ -9,6 +11,7 @@ namespace FileServerSystem___Server.Contracts
         /// <param name="userName">User Name</param>
         /// <param name="password">Password</param>
         /// <returns>Token</returns>
+        [OperationContract]
         string RegisterNewUser(string userName, string password);
 
         /// <summary>
@@ -17,6 +20,7 @@ namespace FileServerSystem___Server.Contracts
         /// <param name="userName">User Name</param>
         /// <param name="password">Password</param>
         /// <returns></returns>
+        [OperationContract]
         string UserLogin(string userName, string password);
 
         /// <summary>
@@ -24,6 +28,7 @@ namespace FileServerSystem___Server.Contracts
         /// </summary>
         /// <param name="userName">User Name</param>
         /// <returns>Nothing</returns>
+        [OperationContract]
         string UserLogOff(string userName);
     }
 }

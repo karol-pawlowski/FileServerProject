@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace FileServerSystem___Server
+namespace FileServerSystemServer
 {
     public static class WebApiConfig
     {
@@ -11,7 +11,7 @@ namespace FileServerSystem___Server
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 

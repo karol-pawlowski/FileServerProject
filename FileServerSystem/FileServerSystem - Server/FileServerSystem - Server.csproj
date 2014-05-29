@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileServerSystem___Server</RootNamespace>
+    <RootNamespace>FileServerSystemServer</RootNamespace>
     <AssemblyName>FileServerSystem - Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -147,15 +147,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Contracts\IUserController.cs" />
+    <Compile Include="Common\BootStrapper.cs" />
+    <Compile Include="Common\FileRepositoryProxy.cs" />
+    <Compile Include="Contracts\IBootStrapper.cs" />
+    <Compile Include="Contracts\IFileRepositoryProxy.cs" />
     <Compile Include="Controllers\FilesController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Data.designer.cs">
+    <Compile Include="FileRepository.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Data.dbml</DependentUpon>
+      <DependentUpon>FileRepository.dbml</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,7 +168,6 @@
     <Content Include="App_Data\FileServerDB_log.ldf">
       <DependentUpon>FileServerDB.mdf</DependentUpon>
     </Content>
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -178,21 +178,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Data.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data.dbml.layout">
-      <DependentUpon>Data.dbml</DependentUpon>
+    <Content Include="FileRepository.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FileRepository.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FileRepository.dbml.layout">
+      <DependentUpon>FileRepository.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

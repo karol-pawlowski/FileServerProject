@@ -9,7 +9,7 @@
     <ProjectGuid>{A3E4B8AE-8B43-4FAF-A288-7A64FBBCF5BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileServerSystem___Server.Tests</RootNamespace>
+    <RootNamespace>FileServerSystemServer.Tests</RootNamespace>
     <AssemblyName>FileServerSystem - Server.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
