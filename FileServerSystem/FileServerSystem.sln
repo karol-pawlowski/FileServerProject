@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileServerSystem - Client", "FileServerSystem - Client\FileServerSystem - Client.csproj", "{578D6D24-FB52-4616-BEAA-98F39B9D0055}"
+	ProjectSection(ProjectDependencies) = postProject
+		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileServerSystem - Server", "FileServerSystem - Server\FileServerSystem - Server.csproj", "{9D1C30F0-3951-46A5-88CD-EE0A1DCE7667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileServerSystem - Server.Tests", "FileServerSystem - Server.Tests\FileServerSystem - Server.Tests.csproj", "{A3E4B8AE-8B43-4FAF-A288-7A64FBBCF5BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileServerSystem.Tests", "FileServerSystem - Server.Tests\FileServerSystem.Tests.csproj", "{A3E4B8AE-8B43-4FAF-A288-7A64FBBCF5BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementService", "UserManagementService\UserManagementService.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
