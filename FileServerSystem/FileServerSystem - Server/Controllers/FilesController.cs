@@ -13,43 +13,51 @@ namespace FileServerSystemServer.Controllers
     public class FilesController : ApiController
     {
         // http://localhost:8015/Files
-
-        private IBootStrapper _bootstrapper;
+                
         private IFileRepositoryProxy _proxy;
 
         public FilesController()
         {
-            _proxy = new FileRepositoryProxy();
-            _bootstrapper = new BootStrapper();
-
-            _bootstrapper.InitializeApplication();
+            _proxy = new FileRepositoryProxy();           
         }
 
         public FilesController(IBootStrapper bootstrapper, IFileRepositoryProxy proxy)
         {
-            _proxy = proxy;
-            _bootstrapper = bootstrapper;
-
-            _bootstrapper.InitializeApplication();
+            _proxy = proxy;       
         }
 
         // GET files
         public IList<string> Get(string token)
         {
-            return _proxy.GetFilesForToken(token);                  
+            return _proxy.GetFilesForToken(token);
         }
 
         // GET values/5
         public HttpResponseMessage Get(string token, int id)
         {
             FileStream file = _proxy.GetSpecificFileForTokenAndId(token, id);
+
+           
+
                        
             return null;
         }
 
         // POST values
-        public void Post(string token, HttpPostedFileBase value)
+        public void Post(string token)
         {
+            var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Files.Count > 0)
+            {
+                foreach (string file in httpRequest.Files)
+                {
+                    HttpPostedFile postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
+                    postedFile.SaveAs(filePath);
+                }
+            }            
+
             //_proxy.AddNewFileForToken(token, value);
             // HttpPostedFileBased 
         }
