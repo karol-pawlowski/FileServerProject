@@ -9,8 +9,8 @@
     <ProjectGuid>{A3E4B8AE-8B43-4FAF-A288-7A64FBBCF5BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileServerSystemServer.Tests</RootNamespace>
-    <AssemblyName>FileServerSystem - Server.Tests</AssemblyName>
+    <RootNamespace>FileServerSystem.Tests</RootNamespace>
+    <AssemblyName>FileServerSystem.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UserControllerTest.cs" />
+    <Compile Include="Controllers\LoginControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\FilesControllerTest.cs" />
   </ItemGroup>
@@ -127,6 +128,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileServerSystem - Client\FileServerSystem - Client.csproj">
+      <Project>{578d6d24-fb52-4616-beaa-98f39b9d0055}</Project>
+      <Name>FileServerSystem - Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileServerSystem - Server\FileServerSystem - Server.csproj">
       <Project>{9D1C30F0-3951-46A5-88CD-EE0A1DCE7667}</Project>
       <Name>FileServerSystem - Server</Name>

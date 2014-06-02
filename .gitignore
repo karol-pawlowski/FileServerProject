@@ -213,3 +213,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+FileServerSystem/FileServerSystem - Server/App_Data/FileServerDB.mdf
+FileServerSystem/FileServerSystem - Server/App_Data/FileServerDB_log.ldf
