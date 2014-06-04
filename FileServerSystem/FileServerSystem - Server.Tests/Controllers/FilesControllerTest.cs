@@ -7,6 +7,9 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FileServerSystemServer;
 using FileServerSystemServer.Controllers;
+using FileServerSystemServer.Contracts;
+using NSubstitute;
+using FileServerSystem.Tests.Controllers;
 
 namespace FileServerSystemServer.Tests.Controllers
 {
@@ -15,30 +18,42 @@ namespace FileServerSystemServer.Tests.Controllers
     {
         [TestMethod]
         public void Get()
-        {
-            //// Arrange
-            //FilesController controller = new FilesController();
+        { 
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IFileRepositoryProxy proxyMock = Substitute.For<IFileRepositoryProxy>();
 
-            //// Act
-            //IEnumerable<string> result = controller.Get();
+            FilesController controller = new FilesController(bootStrapperMock, proxyMock);
 
-            //// Assert
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(2, result.Count());
-            //Assert.AreEqual("value1", result.ElementAt(0));
-            //Assert.AreEqual("value2", result.ElementAt(1));
+            proxyMock.GetFilesForToken("testToken").Returns(new List<string>() { "File.exe", "Image.jpg", "Document.txt"});
+
+            // Act
+            IEnumerable<string> result = controller.Get("testToken");
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual("File.exe", result.ElementAt(0));
+            Assert.AreEqual("Image.jpg", result.ElementAt(1));
+            Assert.AreEqual("Document.txt", result.ElementAt(2));
         }
 
         [TestMethod]
         public void GetById()
         {
             //// Arrange
-            //FilesController controller = new FilesController();
+            //IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            //IFileRepositoryProxy proxyMock = Substitute.For<IFileRepositoryProxy>();
+
+            //FilesController controller = new FilesController(bootStrapperMock, proxyMock);
+
+            //proxyMock.GetSpecificFileForTokenAndId("testToken", 1);
 
             //// Act
-            //string result = controller.Get(5);
+            //HttpResponseMessage result = controller.Get("testToken", 1);
 
             //// Assert
+            //Assert.IsNotNull(result);
             //Assert.AreEqual("value", result);
         }
 

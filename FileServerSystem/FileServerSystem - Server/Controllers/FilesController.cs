@@ -35,12 +35,13 @@ namespace FileServerSystemServer.Controllers
         // GET values/5
         public HttpResponseMessage Get(string token, int id)
         {
+            HttpResponseMessage result = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
             FileStream file = _proxy.GetSpecificFileForTokenAndId(token, id);
+            result.Content = new StreamContent(file);
+            result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
 
-           
-
-                       
-            return null;
+            return result;
         }
 
         // POST values
@@ -48,24 +49,36 @@ namespace FileServerSystemServer.Controllers
         {
             var httpRequest = HttpContext.Current.Request;
 
-            if (httpRequest.Files.Count > 0)
+            if (httpRequest.Files.Count == 1)
             {
-                foreach (string file in httpRequest.Files)
-                {
-                    HttpPostedFile postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
-                    postedFile.SaveAs(filePath);
-                }
-            }            
+                string file = httpRequest.Files.GetKey(0);
+                
+                HttpPostedFile postedFile = httpRequest.Files[file];                    
 
-            //_proxy.AddNewFileForToken(token, value);
-            // HttpPostedFileBased 
+                BinaryReader b = new BinaryReader(postedFile.InputStream);
+                byte[] binData = b.ReadBytes(postedFile.ContentLength);
+
+                _proxy.SaveFileToDatabase(token, binData);                
+            }            
         }
 
         // PUT values/5
-        public void Put(string token, int id, [FromBody]string value)
+        public void Put(string token, int id)
         {
-            //_files[id] = value;
+             var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Files.Count == 1)
+            {
+                string file = httpRequest.Files.GetKey(0);
+                
+                HttpPostedFile postedFile = httpRequest.Files[file];                    
+
+                BinaryReader b = new BinaryReader(postedFile.InputStream);
+                byte[] binData = b.ReadBytes(postedFile.ContentLength);
+
+                _proxy.UpdateFile(token, id, binData);
+            }
+            
         }
 
         // DELETE values/5
