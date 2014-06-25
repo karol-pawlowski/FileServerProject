@@ -3,6 +3,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -39,12 +40,22 @@ namespace FileServerSystemServer.Common
             return null;
         }
 
-        public System.IO.FileStream GetSpecificFileForTokenAndId(string token, int id)
+        public FileStream GetSpecificFileForTokenAndId(string token, int id)
         {
             throw new NotImplementedException();
         }
 
         public void RemoveFileForToken(string token, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveFileToDatabase(string token, byte[] binData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateFile(string token, int id, byte[] binData)
         {
             throw new NotImplementedException();
         }

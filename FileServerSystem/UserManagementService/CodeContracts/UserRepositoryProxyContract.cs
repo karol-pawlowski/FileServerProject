@@ -6,32 +6,33 @@ namespace UserManagementService.CodeContracts
     [ContractClassFor(typeof(IUserRepositoryProxy))]
     public abstract class UserRepositoryProxyContract : IUserRepositoryProxy
     {
-        public void AddNewUserToDatabase(USER user)
+        public bool AddNewUserToDatabase(USER user)
         {
-            Contract.Requires(user != null);
+            System.Diagnostics.Contracts.Contract.Requires(user != null);
+            return System.Diagnostics.Contracts.Contract.Result<bool>();
         }
 
         public bool CheckIfUserExistsInDatabase(string userName)
         {
-            Contract.Requires(userName != null && userName != string.Empty);
-            return Contract.Result<bool>();
+            System.Diagnostics.Contracts.Contract.Requires(userName != null && userName != string.Empty);
+            return System.Diagnostics.Contracts.Contract.Result<bool>();
         }
 
         public string AddNewTokenToDatabase(TOKEN token)
         {
-            Contract.Requires(token != null);
-            return Contract.Result<string>();
+            System.Diagnostics.Contracts.Contract.Requires(token != null);
+            return System.Diagnostics.Contracts.Contract.Result<string>();
         }
 
         public TOKEN GetTokenForUser(string userName)
         {
-            Contract.Requires(userName != null && userName != string.Empty);
-            return Contract.Result<TOKEN>();
+            System.Diagnostics.Contracts.Contract.Requires(userName != null && userName != string.Empty);
+            return System.Diagnostics.Contracts.Contract.Result<TOKEN>();
         }
 
         public void RemoveTokenFromDatabase(TOKEN tokenToRemove)
         {
-            Contract.Requires(tokenToRemove != null);
+            System.Diagnostics.Contracts.Contract.Requires(tokenToRemove != null);
         }
     }
 }

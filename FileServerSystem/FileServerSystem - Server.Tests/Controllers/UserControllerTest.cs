@@ -1,19 +1,30 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+<<<<<<< HEAD
+=======
+using NSubstitute;
+>>>>>>> a0a906ffac12496a5044eee036470929a294058c
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagementService;
+<<<<<<< HEAD
 using UserManagementService.Common;
 using UserManagementService.Contracts;
 
 namespace FileServerSystem.Tests.Controllers
+=======
+using UserManagementService.Contracts;
+
+namespace FileServerSystemServer.Tests.Controllers
+>>>>>>> a0a906ffac12496a5044eee036470929a294058c
 {
     [TestClass]
     public class UserControllerTest
     {
         [TestMethod]
+<<<<<<< HEAD
         public void CreationNewUserTest()
         {
             IUserRepositoryProxy proxyMock = NSubstitute.Substitute.For<IUserRepositoryProxy>();
@@ -40,5 +51,102 @@ namespace FileServerSystem.Tests.Controllers
         }
 
        
+=======
+        public void RegisterNewUserWhereUserDoesNotExist()
+        {
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IUserRepositoryProxy userRepositoryProxy = Substitute.For<IUserRepositoryProxy>();
+            IUserController _userController = new UserController(userRepositoryProxy, bootStrapperMock);
+
+            userRepositoryProxy.AddNewUserToDatabase(null).ReturnsForAnyArgs(true);
+
+            // Act
+            string result = _userController.RegisterNewUser("Karol", "Password");
+
+            // Assert
+            Assert.AreEqual("User has been added", result);
+            userRepositoryProxy.ReceivedWithAnyArgs().AddNewUserToDatabase(null);
+        }
+
+        [TestMethod]
+        public void RegisterNewUserDoesExist()
+        {
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IUserRepositoryProxy userRepositoryProxy = Substitute.For<IUserRepositoryProxy>();
+            IUserController userController = new UserController(userRepositoryProxy, bootStrapperMock);
+
+            userRepositoryProxy.AddNewUserToDatabase(null).ReturnsForAnyArgs(false);
+
+            // Act
+            string result = userController.RegisterNewUser("Karol", "Password");
+
+            // Assert
+            Assert.AreEqual("User has not been added", result);
+            userRepositoryProxy.ReceivedWithAnyArgs().AddNewUserToDatabase(null);
+        }
+
+        [TestMethod]
+        public void UserLoginWhereUserDoesNotExist()
+        {
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IUserRepositoryProxy userRepositoryProxy = Substitute.For<IUserRepositoryProxy>();
+            IUserController userController = new UserController(userRepositoryProxy, bootStrapperMock);
+
+            userRepositoryProxy.CheckIfUserExistsInDatabase("Karol").Returns(false);
+            userRepositoryProxy.AddNewTokenToDatabase(null).ReturnsForAnyArgs("testToken");
+
+            // Act
+            string result = userController.UserLogin("Karol", "Password");
+
+            // Assert
+            Assert.AreEqual("User is not registered", result);
+            userRepositoryProxy.ReceivedWithAnyArgs().CheckIfUserExistsInDatabase(null);            
+        }
+
+        [TestMethod]
+        public void UserLoginWhereUserDoesExist()
+        {
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IUserRepositoryProxy userRepositoryProxy = Substitute.For<IUserRepositoryProxy>();
+            IUserController userController = new UserController(userRepositoryProxy, bootStrapperMock);
+
+            userRepositoryProxy.CheckIfUserExistsInDatabase("Karol").Returns(true);
+            userRepositoryProxy.AddNewTokenToDatabase(null).ReturnsForAnyArgs("testToken");
+
+            // Act
+            string result = userController.UserLogin("Karol", "Password");
+
+            // Assert
+            Assert.AreEqual("testToken", result);
+            userRepositoryProxy.ReceivedWithAnyArgs().CheckIfUserExistsInDatabase(null);
+            userRepositoryProxy.ReceivedWithAnyArgs().AddNewTokenToDatabase(null);
+        }
+
+        [TestMethod]
+        public void UserLogOff()
+        {
+            // Arrange
+            IBootStrapper bootStrapperMock = Substitute.For<IBootStrapper>();
+            IUserRepositoryProxy userRepositoryProxy = Substitute.For<IUserRepositoryProxy>();
+            IUserController userController = new UserController(userRepositoryProxy, bootStrapperMock);
+
+            userRepositoryProxy.CheckIfUserExistsInDatabase("Karol").Returns(true);
+            userRepositoryProxy.GetTokenForUser("Karol").Returns(new UserManagementService.TOKEN());
+            userRepositoryProxy.RemoveTokenFromDatabase(null);
+
+            // Act
+            string result = userController.UserLogOff("Karol");
+
+            // Assert
+            Assert.AreEqual("User has been logged off", result);
+            userRepositoryProxy.ReceivedWithAnyArgs().CheckIfUserExistsInDatabase(null);
+            userRepositoryProxy.ReceivedWithAnyArgs().GetTokenForUser("Karol");
+            userRepositoryProxy.ReceivedWithAnyArgs().RemoveTokenFromDatabase(null);
+        }
+>>>>>>> a0a906ffac12496a5044eee036470929a294058c
     }
 }

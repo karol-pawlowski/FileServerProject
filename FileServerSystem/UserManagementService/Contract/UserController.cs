@@ -31,9 +31,9 @@ namespace UserManagementService
             user.Login = userName;
             user.Password = password;
 
-            _proxy.AddNewUserToDatabase(user);            
-            
-            return "User has been added";        
+            if(_proxy.AddNewUserToDatabase(user))
+                return "User has been added"; 
+            return "User has not been added";  
         }
 
         public string UserLogin(string userName, string password)
@@ -68,6 +68,5 @@ namespace UserManagementService
 
             return "User has been logged off";
         }
-        
     }
 }

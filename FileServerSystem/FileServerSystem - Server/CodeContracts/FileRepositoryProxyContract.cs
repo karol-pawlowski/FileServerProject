@@ -33,5 +33,17 @@ namespace FileServerSystemServer.CodeContracts
             Contract.Requires(!string.IsNullOrEmpty(token));
             Contract.Requires(id > -1);
         }
+
+
+        public void SaveFileToDatabase(string token, byte[] binData)
+        {
+            Contract.Requires(!string.IsNullOrEmpty(token) && binData != null);
+        }
+
+
+        public void UpdateFile(string token, int id, byte[] binData)
+        {
+            Contract.Requires(!string.IsNullOrEmpty(token) && binData != null && id != 0);
+        }
     }
 }

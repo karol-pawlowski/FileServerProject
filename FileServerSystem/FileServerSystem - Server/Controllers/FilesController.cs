@@ -13,51 +13,72 @@ namespace FileServerSystemServer.Controllers
     public class FilesController : ApiController
     {
         // http://localhost:8015/Files
-
-        private IBootStrapper _bootstrapper;
+                
         private IFileRepositoryProxy _proxy;
 
         public FilesController()
         {
-            _proxy = new FileRepositoryProxy();
-            _bootstrapper = new BootStrapper();
-
-            _bootstrapper.InitializeApplication();
+            _proxy = new FileRepositoryProxy();           
         }
 
         public FilesController(IBootStrapper bootstrapper, IFileRepositoryProxy proxy)
         {
-            _proxy = proxy;
-            _bootstrapper = bootstrapper;
-
-            _bootstrapper.InitializeApplication();
+            _proxy = proxy;       
         }
 
         // GET files
         public IList<string> Get(string token)
         {
-            return _proxy.GetFilesForToken(token);                  
+            return _proxy.GetFilesForToken(token);
         }
 
         // GET values/5
         public HttpResponseMessage Get(string token, int id)
         {
+            HttpResponseMessage result = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
             FileStream file = _proxy.GetSpecificFileForTokenAndId(token, id);
-                       
-            return null;
+            result.Content = new StreamContent(file);
+            result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+            return result;
         }
 
         // POST values
-        public void Post(string token, HttpPostedFileBase value)
+        public void Post(string token)
         {
-            //_proxy.AddNewFileForToken(token, value);
-            // HttpPostedFileBased 
+            var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Files.Count == 1)
+            {
+                string file = httpRequest.Files.GetKey(0);
+                
+                HttpPostedFile postedFile = httpRequest.Files[file];                    
+
+                BinaryReader b = new BinaryReader(postedFile.InputStream);
+                byte[] binData = b.ReadBytes(postedFile.ContentLength);
+
+                _proxy.SaveFileToDatabase(token, binData);                
+            }            
         }
 
         // PUT values/5
-        public void Put(string token, int id, [FromBody]string value)
+        public void Put(string token, int id)
         {
-            //_files[id] = value;
+             var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Files.Count == 1)
+            {
+                string file = httpRequest.Files.GetKey(0);
+                
+                HttpPostedFile postedFile = httpRequest.Files[file];                    
+
+                BinaryReader b = new BinaryReader(postedFile.InputStream);
+                byte[] binData = b.ReadBytes(postedFile.ContentLength);
+
+                _proxy.UpdateFile(token, id, binData);
+            }
+            
         }
 
         // DELETE values/5

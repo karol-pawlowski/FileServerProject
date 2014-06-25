@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +25,7 @@ namespace UserManagementService.Common
             _log = LogManager.GetLogger(typeof(UserRepositoryProxy));
         }
 
-        public void AddNewUserToDatabase(USER user)
+        public bool AddNewUserToDatabase(USER user)
         {
             _users.InsertOnSubmit(user);
 
@@ -36,8 +35,10 @@ namespace UserManagementService.Common
             }
             catch (Exception ex)
             {
-                _log.Error(ex.Message);             
+                _log.Error(ex.Message);
+                return false;
             }
+            return true;
         }
 
 
@@ -61,7 +62,9 @@ namespace UserManagementService.Common
             }
             catch (Exception ex)
             {
-                _log.Error(ex.Message);               
+                _log.Error(ex.Message);
+                return "Token has not been generated";
+             
             }
             return token.UserToken;
         }
@@ -86,12 +89,12 @@ namespace UserManagementService.Common
             }
         }
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         protected void ObjectInvariant()
         {
-            Contract.Invariant(_users != null);
-            Contract.Invariant(_tokens != null);
-            Contract.Invariant(_dataContext != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_users != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_tokens != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_dataContext != null);
         }
     }
 }
