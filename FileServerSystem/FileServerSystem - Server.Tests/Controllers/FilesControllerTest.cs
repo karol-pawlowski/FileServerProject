@@ -17,7 +17,7 @@ namespace FileServerSystemServer.Tests.Controllers
         public void Get()
         {
             //// Arrange
-            //FilesController controller = new FilesController();
+            FilesController controller = new FilesController();
 
             //// Act
             //IEnumerable<string> result = controller.Get();
