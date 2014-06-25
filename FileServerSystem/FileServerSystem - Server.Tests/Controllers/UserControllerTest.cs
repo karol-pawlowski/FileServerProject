@@ -1,30 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-<<<<<<< HEAD
-=======
 using NSubstitute;
->>>>>>> a0a906ffac12496a5044eee036470929a294058c
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagementService;
-<<<<<<< HEAD
 using UserManagementService.Common;
 using UserManagementService.Contracts;
 
-namespace FileServerSystem.Tests.Controllers
-=======
-using UserManagementService.Contracts;
-
 namespace FileServerSystemServer.Tests.Controllers
->>>>>>> a0a906ffac12496a5044eee036470929a294058c
 {
     [TestClass]
     public class UserControllerTest
     {
         [TestMethod]
-<<<<<<< HEAD
         public void CreationNewUserTest()
         {
             IUserRepositoryProxy proxyMock = NSubstitute.Substitute.For<IUserRepositoryProxy>();
@@ -50,8 +40,6 @@ namespace FileServerSystemServer.Tests.Controllers
             Assert.AreEqual("User is not registered", result);
         }
 
-       
-=======
         public void RegisterNewUserWhereUserDoesNotExist()
         {
             // Arrange
@@ -147,6 +135,5 @@ namespace FileServerSystemServer.Tests.Controllers
             userRepositoryProxy.ReceivedWithAnyArgs().GetTokenForUser("Karol");
             userRepositoryProxy.ReceivedWithAnyArgs().RemoveTokenFromDatabase(null);
         }
->>>>>>> a0a906ffac12496a5044eee036470929a294058c
     }
 }
