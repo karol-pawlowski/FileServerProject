@@ -24,7 +24,7 @@ namespace FileServerSystemServer.Tests.Controllers
 
             var result = userController.RegisterNewUser("Karol", "Password");
 
-            Assert.AreEqual("User has been added", result);
+            Assert.AreEqual("User has not been added", result);
         }
 
         [TestMethod]
